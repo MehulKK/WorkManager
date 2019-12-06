@@ -10,26 +10,22 @@ import kotlinx.android.synthetic.main.activity_main.*
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.WorkManager
 import androidx.work.PeriodicWorkRequest
+import java.util.*
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicInteger
 
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
-    private lateinit var oneTimeRequest: OneTimeWorkRequest
+    private lateinit var oneTimeRequest: WorkRequest
     private lateinit var mConstraints: Constraints
     private lateinit var mWorkManager: WorkManager
+    private lateinit var mWorkId : UUID
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         mWorkManager = WorkManager.getInstance(this)
-
-        val periodicWork = PeriodicWorkRequest.Builder(MyPeriodicTimeWorkRequestWork::class.java, 15, TimeUnit.MINUTES)
-            .addTag(MainActivity::class.java.simpleName)
-            .build()
-        WorkManager.getInstance(this)
-            .enqueue(periodicWork)
 
         button.setOnClickListener(this)
         withStorageLow.setOnClickListener(this)
@@ -37,11 +33,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         withRequiresCharging.setOnClickListener(this)
         withDeviceIdle.setOnClickListener(this)
         withRequiredNetwork.setOnClickListener(this)
-
-        WorkManager.getInstance(this).getWorkInfoByIdLiveData(periodicWork.id)
-            .observe(this, Observer<WorkInfo> { workInfo ->
-                txtStatus.append(workInfo.state.name + "\n")
-            })
+        withPeriodic.setOnClickListener(this)
 
     }
 
@@ -49,30 +41,43 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         when (p0?.id) {
             R.id.button -> {
                 oneTimeRequest = OneTimeWorkRequest.Builder(MyOneTimeWorkRequestWork::class.java).build()
+                mWorkId = oneTimeRequest.id
             }
             R.id.withStorageLow -> {
                 mConstraints = Constraints.Builder().setRequiresStorageNotLow(true).build()
                 oneTimeRequest = OneTimeWorkRequest.Builder(MyOneTimeWorkRequestWork::class.java).setConstraints(mConstraints).build()
+                mWorkId = oneTimeRequest.id
             }
             R.id.withBatteryLow -> {
                 mConstraints = Constraints.Builder().setRequiresBatteryNotLow(true).build()
                 oneTimeRequest = OneTimeWorkRequest.Builder(MyOneTimeWorkRequestWork::class.java).setConstraints(mConstraints).build()
+                mWorkId = oneTimeRequest.id
             }
             R.id.withRequiresCharging -> {
                 mConstraints = Constraints.Builder().setRequiresCharging(true).build()
                 oneTimeRequest = OneTimeWorkRequest.Builder(MyOneTimeWorkRequestWork::class.java).setConstraints(mConstraints).build()
+                mWorkId = oneTimeRequest.id
             }
             R.id.withDeviceIdle -> {
                 mConstraints = Constraints.Builder().setRequiresDeviceIdle(true).build()
                 oneTimeRequest = OneTimeWorkRequest.Builder(MyOneTimeWorkRequestWork::class.java).setConstraints(mConstraints).build()
+                mWorkId = oneTimeRequest.id
             }
             R.id.withRequiredNetwork -> {
                 mConstraints = Constraints.Builder().setRequiredNetworkType(NetworkType.NOT_REQUIRED).build()
                 oneTimeRequest = OneTimeWorkRequest.Builder(MyOneTimeWorkRequestWork::class.java).setConstraints(mConstraints).build()
+                mWorkId = oneTimeRequest.id
+            }
+            R.id.withPeriodic->{
+                oneTimeRequest = PeriodicWorkRequest.Builder(MyPeriodicTimeWorkRequestWork::class.java, 15, TimeUnit.MINUTES)
+                    .addTag(MainActivity::class.java.simpleName)
+                    .build()
+                mWorkManager.enqueue(oneTimeRequest)
+                mWorkId = oneTimeRequest.id
             }
         }
 
-        WorkManager.getInstance(this).getWorkInfoByIdLiveData(oneTimeRequest.id)
+        WorkManager.getInstance(this).getWorkInfoByIdLiveData(mWorkId)
             .observe(this, Observer<WorkInfo> { workInfo ->
                 txtStatus.append(workInfo.state.name + "\n")
             })

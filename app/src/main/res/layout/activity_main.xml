@@ -70,4 +70,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/withDeviceIdle" />
 
+    <Button
+        android:id="@+id/withPeriodic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/schedule_periodic_work"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/withRequiredNetwork" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
