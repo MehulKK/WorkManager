@@ -11,13 +11,13 @@
 
 
 ## Key Feature
-   Backwards compatible up to API 14
-   Add work constraints like network availability or charging status
-   Schedule asynchronous one-off or periodic tasks
-   Monitor and manage scheduled tasks
-   Chain tasks together
-   Ensures task execution, even if the app or device restarts
-   Adheres to power-saving features like Doze mode
+   - Backwards compatible up to API 14
+   - Add work constraints like network availability or charging status
+   - Schedule asynchronous one-off or periodic tasks
+   - Monitor and manage scheduled tasks
+   - Chain tasks together
+   - Ensures task execution, even if the app or device restarts
+   - Adheres to power-saving features like Doze mode
 
 ## WorkRequest can be of two type
    - ### OneTimeWorkRequest
