@@ -20,5 +20,5 @@
    Adheres to power-saving features like Doze mode
 
 ## WorkRequest can be of two type
-   OneTimeWorkRequest– That means you requesting for non-repetitive work.
-   PeriodicWorkRequest– This class is used for creating a request for repetitive work. This work executes multiple times until it is cancelled, with the first execution happening immediately or as soon as the given Constraints are met.
+   - OneTimeWorkRequest : That means you requesting for non-repetitive work.
+   - PeriodicWorkRequest : This class is used for creating a request for repetitive work. This work executes multiple times until it is cancelled, with the first execution happening immediately or as soon as the given Constraints are met.
