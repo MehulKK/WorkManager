@@ -1,6 +1,6 @@
 ![banner](https://github.com/MehulKK/WorkManager/blob/master/Banner.png)
 
-# README #
+# WorkManager #
 ## Schedule tasks with Android Jetpack WorkManager
 ### Pre requisites
 - minimum SDK    : 14
