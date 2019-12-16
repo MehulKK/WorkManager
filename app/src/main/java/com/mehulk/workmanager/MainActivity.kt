@@ -45,27 +45,32 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             }
             R.id.withStorageLow -> {
                 mConstraints = Constraints.Builder().setRequiresStorageNotLow(true).build()
-                oneTimeRequest = OneTimeWorkRequest.Builder(MyOneTimeWorkRequestWork::class.java).setConstraints(mConstraints).build()
+                oneTimeRequest = OneTimeWorkRequest.Builder(MyOneTimeWorkRequestWork::class.java)
+                    .setConstraints(mConstraints).build()
                 mWorkId = oneTimeRequest.id
             }
             R.id.withBatteryLow -> {
                 mConstraints = Constraints.Builder().setRequiresBatteryNotLow(true).build()
-                oneTimeRequest = OneTimeWorkRequest.Builder(MyOneTimeWorkRequestWork::class.java).setConstraints(mConstraints).build()
+                oneTimeRequest = OneTimeWorkRequest.Builder(MyOneTimeWorkRequestWork::class.java)
+                    .setConstraints(mConstraints).build()
                 mWorkId = oneTimeRequest.id
             }
             R.id.withRequiresCharging -> {
                 mConstraints = Constraints.Builder().setRequiresCharging(true).build()
-                oneTimeRequest = OneTimeWorkRequest.Builder(MyOneTimeWorkRequestWork::class.java).setConstraints(mConstraints).build()
+                oneTimeRequest = OneTimeWorkRequest.Builder(MyOneTimeWorkRequestWork::class.java)
+                    .setConstraints(mConstraints).build()
                 mWorkId = oneTimeRequest.id
             }
             R.id.withDeviceIdle -> {
                 mConstraints = Constraints.Builder().setRequiresDeviceIdle(true).build()
-                oneTimeRequest = OneTimeWorkRequest.Builder(MyOneTimeWorkRequestWork::class.java).setConstraints(mConstraints).build()
+                oneTimeRequest = OneTimeWorkRequest.Builder(MyOneTimeWorkRequestWork::class.java)
+                    .setConstraints(mConstraints).build()
                 mWorkId = oneTimeRequest.id
             }
             R.id.withRequiredNetwork -> {
-                mConstraints = Constraints.Builder().setRequiredNetworkType(NetworkType.NOT_REQUIRED).build()
-                oneTimeRequest = OneTimeWorkRequest.Builder(MyOneTimeWorkRequestWork::class.java).setConstraints(mConstraints).build()
+                mConstraints = Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build()
+                oneTimeRequest = OneTimeWorkRequest.Builder(MyOneTimeWorkRequestWork::class.java)
+                    .setConstraints(mConstraints).build()
                 mWorkId = oneTimeRequest.id
             }
             R.id.withPeriodic->{
