@@ -2,6 +2,7 @@
 
 # WorkManager #
 ## Schedule tasks with Android Jetpack WorkManager
+## More Info : https://medium.com/simform-engineering/workmanager-schedule-your-task-in-easy-way-f10cd50cddb5
 ### Pre requisites
 - minimum SDK    : 14
 - Android Studio : 3.4 stable
